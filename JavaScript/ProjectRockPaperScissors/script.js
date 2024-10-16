@@ -1,5 +1,7 @@
 console.log("Hello World!")
 console.log("This is Rock, Paper, Scissors!!!")
+let humanScore = 0;
+let computerScore = 0;
 
 function	getComputerChoice() {
 	let choice = Math.random();
@@ -19,10 +21,11 @@ function	getComputerChoice() {
 
 function	getHumanChoice() {
 	const prompt = require('prompt-sync')();
-	return prompt("What's your choice, human?!");
+	console.log("What's your choice, human?!");
+	return prompt();
 }
 
-function gameLogic() {
+function playGame() {
 	const humanChoice = getHumanChoice().toLowerCase();
 	const computerChoice = getComputerChoice().toLowerCase();
 
@@ -30,18 +33,40 @@ function gameLogic() {
 		console.log("Unentschieden!");
 		return "Unentschieden!";
 	} else if (humanChoice == "papier" && computerChoice == "stein") {
+		humanScore++;
 		console.log("Mensch gewinnt!");
 		return "Mensch gewinnt!";
 	} else if (humanChoice == "stein" && computerChoice == "scheren") {
 		console.log("Mensch gewinnt!");
+		humanScore++;
 		return "Mensch gewinnt!";
 	} else if (humanChoice == "scheren" && computerChoice == "papier") {
 		console.log("Mensch gewinnt!");
+		humanScore++;
 		return "Mensch gewinnt!";
 	} else {
 		console.log("Mensch verloren!");
+		computerScore++;
 		return "Mensch verloren";
 	}
 }
+function theGame() {
+	let i = 0;
+	while (i < 5) {
+		playGame()
+		i++;
+	}
+	console.log("Und der endergebnis ist...")
+	console.log("Computer: {} VS Mensch: {}", computerScore, humanScore);
+	if (humanScore > computerScore) {
+		return console.log("Mensch gewinnt!!");
+	}
+	else if (computerScore > humanScore) {
+		return console.log("Computer gewinnt!!");
+	}
+	else {
+		return console.log("Unentschieden!")
+	}
+}
 
-gameLogic();
+theGame();
